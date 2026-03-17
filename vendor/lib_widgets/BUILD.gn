@@ -1,0 +1,75 @@
+# Copyright 2017 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/dart/dart_library.gni")
+import("//topaz/runtime/dart/dart_test.gni")
+
+dart_library("lib.widgets") {
+  package_name = "lib.widgets"
+
+  sdk_category = "partner"
+
+  sources = [
+    "application.dart",
+    "model.dart",
+    "modular.dart",
+    "src/application/application_widget.dart",
+    "src/model/embedder_model.dart",
+    "src/model/idle_model.dart",
+    "src/model/model.dart",
+    "src/model/spring_model.dart",
+    "src/model/ticking_model.dart",
+    "src/model/tracing_spring_model.dart",
+    "src/modular/dank_user_shell_widget.dart",
+    "src/modular/device_shell_model.dart",
+    "src/modular/device_shell_widget.dart",
+    "src/modular/user_shell_model.dart",
+    "src/modular/user_shell_widget.dart",
+    "src/utils/snapshot_manager.dart",
+    "src/widgets/alphatar.dart",
+    "src/widgets/conditional_builder.dart",
+    "src/widgets/fuchsia_spinner.dart",
+    "src/widgets/future_widget.dart",
+    "src/widgets/mondrian_spinner.dart",
+    "src/widgets/rk4_spring_simulation.dart",
+    "src/widgets/shadowed_text.dart",
+    "src/widgets/simulated_positioned.dart",
+    "src/widgets/text_placeholder.dart",
+    "src/widgets/ticking_double_state.dart",
+    "src/widgets/ticking_state.dart",
+    "src/widgets/window_media_query.dart",
+    "widgets.dart",
+  ]
+
+  deps = [
+    "//garnet/bin/ui/snapshot:snapshot_loader",
+    "//garnet/public/fidl/fuchsia.ui.policy",
+    "//garnet/public/fidl/fuchsia.ui.viewsv1",
+    "//peridot/public/fidl/fuchsia.modular",
+    "//third_party/dart-pkg/git/flutter/packages/flutter",
+    "//third_party/dart-pkg/pub/flutter_image",
+    "//topaz/public/dart/fidl",
+    "//topaz/public/lib/app/dart",
+    "//topaz/public/lib/device/dart",
+    "//topaz/public/lib/module/dart",
+    "//topaz/public/lib/ui/flutter",
+    "//topaz/public/lib/user/dart",
+    "//topaz/tools/widget_explorer/packages/widget_explorer_meta",
+    "//zircon/public/fidl/fuchsia-cobalt",
+  ]
+}
+
+dart_test("dart_widget_tests") {
+  sources = [
+    "alphatar_test.dart",
+    "rk4_spring_simulation_test.dart",
+  ]
+
+  deps = [
+    ":lib.widgets",
+    "//third_party/dart-pkg/git/flutter/packages/flutter_test",
+    "//third_party/dart-pkg/pub/test",
+    "//topaz/public/lib/testing/flutter",
+  ]
+}

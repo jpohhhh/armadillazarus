@@ -1,0 +1,22 @@
+# Copyright 2016 The Fuchsia Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/dart/dart_library.gni")
+
+dart_library("widgets") {
+  package_name = "sysui_widgets"
+
+  sources = [
+    "default_bundle.dart",
+    "icon_slider.dart",
+    "key_mappings.dart",
+    "three_column_aligned_layout_delegate.dart",
+    "time_stringer.dart",
+  ]
+
+  deps = [
+    "//third_party/dart-pkg/git/flutter/packages/flutter",
+    "//topaz/public/dart/widgets:lib.widgets",
+  ]
+}

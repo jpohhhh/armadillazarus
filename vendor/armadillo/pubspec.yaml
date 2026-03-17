@@ -1,0 +1,100 @@
+# Copyright 2016 The Fuchsia Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+name: armadillo
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  lib.widgets:
+    path: ../lib_widgets
+  sysui_widgets:
+    path: ../sysui_widgets
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter:
+  uses-material-design: true
+  assets:
+    - lib/res/Background.jpg
+    - lib/res/googlelogo_color_62x24dp.png
+    - lib/res/googlemic_color_24dp.png
+    - lib/res/guest_user_image.png
+    - lib/res/ic_airplanemode_active_black.png
+    - lib/res/ic_airplanemode_inactive_grey600.png
+    - lib/res/ic_battery_20_white_48dp.png
+    - lib/res/ic_battery_30_white_48dp.png
+    - lib/res/ic_battery_50_white_48dp.png
+    - lib/res/ic_battery_60_white_48dp.png
+    - lib/res/ic_battery_80_white_48dp.png
+    - lib/res/ic_battery_90_white_48dp.png
+    - lib/res/ic_battery_alert_white_48dp.png
+    - lib/res/ic_battery_charging_20_white_48dp.png
+    - lib/res/ic_battery_charging_30_white_48dp.png
+    - lib/res/ic_battery_charging_50_white_48dp.png
+    - lib/res/ic_battery_charging_60_white_48dp.png
+    - lib/res/ic_battery_charging_80_white_48dp.png
+    - lib/res/ic_battery_charging_90_white_48dp.png
+    - lib/res/ic_battery_charging_full_white_48dp.png
+    - lib/res/ic_battery_full_white_48dp.png
+    - lib/res/ic_battery_unknown_white_48dp.png
+    - lib/res/ic_brightness_high_grey600.png
+    - lib/res/ic_do_not_disturb_off_grey600.png
+    - lib/res/ic_do_not_disturb_on_black.png
+    - lib/res/ic_mic_grey600_1x_web_24dp.png
+    - lib/res/ic_screen_lock_rotation_black.png
+    - lib/res/ic_screen_rotation_black.png
+    - lib/res/ic_signal_cellular_connected_no_internet_0_bar_grey600_24dp.png
+    - lib/res/ic_signal_wifi_3_bar_grey600_24dp.png
+    - lib/res/ic_volume_up_grey600.png
+    - lib/res/logo_googleg_24dpx4.png
+    - lib/res/demo/1-portugal-the-man.jpeg
+    - lib/res/demo/9-hotel.jpg
+    - lib/res/demo/9-nonch-harpin.png
+    - lib/res/demo/aparna-home.jpg
+    - lib/res/demo/aparna-sf.jpg
+    - lib/res/demo/aparna-work.jpg
+    - lib/res/demo/calendar.png
+    - lib/res/demo/cc0_calafia.jpg
+    - lib/res/demo/cc0_music.jpg
+    - lib/res/demo/chat_96dp.png
+    - lib/res/demo/cinefilm_96.png
+    - lib/res/demo/danielle-home.jpg
+    - lib/res/demo/danielle_cc0.jpg
+    - lib/res/demo/docs.png
+    - lib/res/demo/drawing.jpeg
+    - lib/res/demo/expenses_96.png
+    - lib/res/demo/google_photos.png
+    - lib/res/demo/ic_stat_3_googblue_2x_web_24dp.png
+    - lib/res/demo/inbox_96dp.png
+    - lib/res/demo/logo_fitness_color_2x_web_96.png
+    - lib/res/demo/logo_mostly_sunny_light_color_96dp.png
+    - lib/res/demo/miguel_cc0.png
+    - lib/res/demo/music_96dp.png
+    - lib/res/demo/panda.png.jpg
+    - lib/res/demo/pavlova.jpg
+    - lib/res/demo/shamra.jpg
+    - lib/res/demo/simon_96.jpg
+    - lib/res/demo/slides.png
+    - lib/res/demo/sophie_cc0.jpg
+    - lib/res/demo/story_calendar.png
+    - lib/res/demo/story_cinefilm.png
+    - lib/res/demo/story_expense.png
+    - lib/res/demo/story_fluxMemories.png
+    - lib/res/demo/story_googleIO.png
+    - lib/res/demo/story_hype.png
+    - lib/res/demo/story_marketing.png
+    - lib/res/demo/story_natureSense.png
+    - lib/res/demo/story_overthrough.png
+    - lib/res/demo/story_phonecall.png
+    - lib/res/demo/story_steps.png
+    - lib/res/demo/story_threepeaks.png
+    - lib/res/demo/story_toetheline.png
+    - lib/res/demo/story_topcook.png
+    - lib/res/demo/story_truefoods.png
+    - lib/res/demo/tahiti_240.png
+    - lib/res/demo/threepeaks.png
+    - lib/res/demo/truefood.png
+    - lib/res/demo/youtube_96dp.png
