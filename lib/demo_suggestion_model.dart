@@ -1,8 +1,6 @@
 // ARMADILLAZARUS: Demo suggestion model seeded from the original
 // home_work_agent ask_proposals.json and contextual_location_proposals.json.
 
-import 'dart:typed_data';
-
 import 'package:armadillo/next.dart';
 import 'package:armadillo/recent.dart';
 import 'package:flutter/services.dart';
@@ -250,9 +248,6 @@ class DemoSuggestionModel extends SuggestionModel {
   void onSuggestionSelected(Suggestion suggestion) {
     debugPrint('Suggestion selected: ${suggestion.title}');
   }
-
-  @override
-  void storyClusterFocusChanged(StoryCluster storyCluster) {}
 }
 
 /// Internal proposal descriptor.

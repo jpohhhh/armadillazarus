@@ -1,16 +1,11 @@
-import 'dart:math' as math;
-
 import 'package:armadillo/common.dart';
 import 'package:armadillo/next.dart';
 import 'package:armadillo/now.dart';
 import 'package:armadillo/overview.dart';
 import 'package:armadillo/recent.dart';
-import 'package:armadillo/src/now/power_model.dart';
-import 'package:armadillo/src/now/volume_model.dart';
-import 'package:armadillo/src/next/voice_model.dart';
+// ignore: implementation_imports
 import 'package:armadillo/src/recent/display_mode.dart';
 import 'package:flutter/material.dart';
-import 'package:lib.widgets/model.dart';
 
 import 'demo_suggestion_model.dart';
 
@@ -363,20 +358,8 @@ class _StoryContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      padding: const EdgeInsets.all(24),
-      alignment: Alignment.bottomLeft,
-      child: Text(
-        title,
-        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    );
+    // Canonical Fuchsia used a raw ChildView (native surface) here.
+    // This is the minimal equivalent: just a colored box with a label.
+    return ColoredBox(color: color);
   }
 }
