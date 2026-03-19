@@ -187,7 +187,8 @@ class _PanelDragTargetsState extends TickingState<PanelDragTargets> {
   }
 
   void _onAccept(StoryClusterDragData data, Velocity velocity) {
-    StoryCluster storyCluster = StoryModel.of(context).getStoryCluster(data.id);
+    StoryCluster? storyCluster = StoryModel.of(context).getStoryCluster(data.id);
+    if (storyCluster == null) return;
 
     // When focused, if the cluster has been flung, don't call the target
     // onDrop, instead just adjust the appropriate story bars.  Since a dragged
@@ -478,6 +479,7 @@ class _PanelDragTargetsState extends TickingState<PanelDragTargets> {
       StoryCluster? storyCluster = StoryModel.of(context).getStoryCluster(
         data.id,
       );
+      if (storyCluster == null) continue;
       PanelDragTarget closestTarget = _getClosestTarget(
         candidateInfo.dragDirection,
         storyClusterPoint,
@@ -488,7 +490,7 @@ class _PanelDragTargetsState extends TickingState<PanelDragTargets> {
       candidateInfo
           .requestLock(closestTarget, storyClusterPoint)
           .then((bool requestGranted) {
-        if (requestGranted) {
+        if (requestGranted && storyCluster != null) {
           _lockClosestTarget(
             candidateInfo: candidateInfo,
             storyCluster: storyCluster,
@@ -540,7 +542,8 @@ class _PanelDragTargetsState extends TickingState<PanelDragTargets> {
         closestTarget = target;
       }
     }
-    return closestTarget!;
+    // ARMADILLAZARUS(parity): can be null when no targets match during drag.
+    return closestTarget ?? _targets.first;
   }
 
   void _populateTargets() {

@@ -306,6 +306,11 @@ class _DragAvatarWidgetState extends TickingState<_DragAvatarWidget> {
 
   @override
   Widget build(BuildContext context) {
+    // ARMADILLAZARUS(parity): guard against deactivated widget lookups
+    // during mid-drag cluster transitions.
+    if (widget.overlayKey.currentContext == null) {
+      return const SizedBox.shrink();
+    }
     RenderBox overlayBox =
         widget.overlayKey.currentContext!.findRenderObject()! as RenderBox;
     Offset overlayTopLeft = overlayBox.localToGlobal(Offset.zero);
@@ -315,6 +320,9 @@ class _DragAvatarWidgetState extends TickingState<_DragAvatarWidget> {
 
     double returnProgress = _returnSimulation?.value ?? 0.0;
     if (returnProgress > 0.0) {
+      if (widget.returnTargetKey.currentContext == null) {
+        return const SizedBox.shrink();
+      }
       final RenderBox returnTargetBox = widget.returnTargetKey.currentContext!
           .findRenderObject()! as RenderBox;
       final Offset returnTargetTopLeft = returnTargetBox.localToGlobal(

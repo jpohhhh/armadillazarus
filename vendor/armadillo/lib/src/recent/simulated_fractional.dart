@@ -101,18 +101,22 @@ class SimulatedFractionalState extends TickingState<SimulatedFractional> {
     startTicking();
   }
 
+  // ARMADILLAZARUS(parity): spring simulations can produce NaN during
+  // drag transitions, which crashes Stack layout. Replace NaN with 0.
+  static double _safe(double v) => v.isNaN ? 0.0 : v;
+
   @override
   Widget build(BuildContext context) => _fractionalTopSimulation == null
       ? new SizedBox(
-          width: _fractionalWidthSimulation.value * widget.size.width,
-          height: _fractionalHeightSimulation.value * widget.size.height,
+          width: _safe(_fractionalWidthSimulation.value * widget.size.width),
+          height: _safe(_fractionalHeightSimulation.value * widget.size.height),
           child: widget.child,
         )
       : new Positioned(
-          top: _fractionalTopSimulation!.value * widget.size.height,
-          left: _fractionalLeftSimulation!.value * widget.size.width,
-          width: _fractionalWidthSimulation.value * widget.size.width,
-          height: _fractionalHeightSimulation.value * widget.size.height,
+          top: _safe(_fractionalTopSimulation!.value * widget.size.height),
+          left: _safe(_fractionalLeftSimulation!.value * widget.size.width),
+          width: _safe(_fractionalWidthSimulation.value * widget.size.width),
+          height: _safe(_fractionalHeightSimulation.value * widget.size.height),
           child: widget.child,
         );
 

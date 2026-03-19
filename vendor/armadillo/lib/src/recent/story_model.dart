@@ -301,11 +301,12 @@ class StoryModel extends Model {
   }
 
   /// Finds and returns the [StoryCluster] with the id equal to
-  /// [storyClusterId].
-  /// TODO(apwilson): have callers handle when the story cluster no longer exists.
-  StoryCluster getStoryCluster(StoryClusterId storyClusterId) => _storyClusters
+  /// [storyClusterId], or null if it no longer exists (e.g. mid-drag merge).
+  // ARMADILLAZARUS(parity): original used .single which crashes during drag
+  // when clusters are mid-transition. Nullable per the original TODO.
+  StoryCluster? getStoryCluster(StoryClusterId storyClusterId) => _storyClusters
       .where((StoryCluster storyCluster) => storyCluster.id == storyClusterId)
-      .single;
+      .singleOrNull;
 
   /// Removes any [StoryCluster]s that consist of entirely place holder stories.
   void clearPlaceHolderStoryClusters() {

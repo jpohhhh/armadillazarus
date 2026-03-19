@@ -81,10 +81,11 @@ class StoryClusterWidget extends StatelessWidget {
         useWrapper: _isUnfocused && !storyCluster.isPlaceholder,
         builder: (BuildContext context, Widget child) =>
             new ArmadilloLongPressDraggable<StoryClusterDragData>(
-          // ARMADILLAZARUS(parity): GlobalKey causes framework conflict
-          // with modern MultiChildRenderObjectElement._children late init.
-          // Using ValueKey for now; restore GlobalKey when drag is wired.
-          // key: storyCluster.clusterDraggableKey,
+          // ARMADILLAZARUS(parity): GlobalKey was previously disabled here
+          // due to MultiChildRenderObjectElement._children late init crash.
+          // Restored now that _SafeMultiChildElement guards forgetChild()
+          // and _StoryListChild uses ValueKey(clusterId) for stable diffing.
+          key: storyCluster.clusterDraggableKey,
           overlayKey: overlayKey,
           data: new StoryClusterDragData(
               id: storyCluster.id, onFirstHover: () {}, onNoTarget: () {}),
@@ -101,9 +102,10 @@ class StoryClusterWidget extends StatelessWidget {
               StoryClusterDragStateModel.of(context).removeDragging(
             storyCluster.id,
           ),
-          onDismiss: () => StoryModel.of(context).delete(
-            StoryModel.of(context).getStoryCluster(storyCluster.id),
-          ),
+          onDismiss: () {
+            final c = StoryModel.of(context).getStoryCluster(storyCluster.id);
+            if (c != null) StoryModel.of(context).delete(c);
+          },
           feedbackBuilder: (Offset localDragStartPoint, Size initialSize) =>
               storyCluster.wrapWithModels(
                 child: new StoryClusterDragFeedback(

@@ -79,20 +79,24 @@ class StoryPanels extends StatelessWidget {
   /// * InlinePreview
   /// * InlinePreviewHint
   /// * Nothing
+  // ARMADILLAZARUS(parity): elevation can go negative during drag
+  // transitions; PhysicalModel asserts >= 0.
   double _getElevation(double dragProgress) {
+    double e;
     if (isBeingDragged) {
-      return Elevations.draggedStoryCluster * dragProgress;
+      e = Elevations.draggedStoryCluster * dragProgress;
     } else if (focusProgress > 0.0) {
-      return Elevations.focusedStoryCluster * focusProgress;
+      e = Elevations.focusedStoryCluster * focusProgress;
     } else {
       // This will progressively animate the the elevation of a story cluster
       // when it goes from the inlinePreview hint state to the full blown inline
       // preview state.
-      return (storyCluster.inlinePreviewScaleModel.value +
+      e = (storyCluster.inlinePreviewScaleModel.value +
               storyCluster.inlinePreviewHintScaleModel.value) *
           Elevations.storyClusterInlinePreview /
           2.0;
     }
+    return e.clamp(0.0, double.infinity);
   }
 
   @override
@@ -209,8 +213,9 @@ class StoryPanels extends StatelessWidget {
               }
 
               // 3. Add placeholders to feedback cluster.
-              StoryCluster feedbackCluster =
+              StoryCluster? feedbackCluster =
                   StoryModel.of(context).getStoryCluster(story.clusterId);
+              if (feedbackCluster == null) return;
               for (StoryId storyId in storyPanelsOnDrag.keys) {
                 if (storyId != story.id) {
                   feedbackCluster.add(
@@ -261,7 +266,7 @@ class StoryPanels extends StatelessWidget {
 
             // 4. Remove the split story cluster from the cluster list.
             StoryModel.of(context).remove(
-              StoryModel.of(context).getStoryCluster(story.clusterId),
+              StoryModel.of(context).getStoryCluster(story.clusterId)!,
             );
             StoryModel.of(context).clearPlaceHolderStoryClusters();
           },
@@ -293,13 +298,15 @@ class StoryPanels extends StatelessWidget {
             StoryClusterDragStateModel.of(context).removeDragging(
           story.clusterId,
         ),
-        onDismiss: () => StoryModel.of(context).delete(
-          StoryModel.of(context).getStoryCluster(story.clusterId),
-        ),
+        onDismiss: () {
+          final c = StoryModel.of(context).getStoryCluster(story.clusterId);
+          if (c != null) StoryModel.of(context).delete(c);
+        },
         childWhenDragging: Nothing.widget,
         feedbackBuilder: (Offset localDragStartPoint, Size initialSize) {
-          StoryCluster storyCluster =
+          StoryCluster? storyCluster =
               StoryModel.of(context).getStoryCluster(story.clusterId);
+          if (storyCluster == null) return const SizedBox.shrink();
 
           return new StoryClusterDragFeedback(
             key: storyCluster.dragFeedbackKey,

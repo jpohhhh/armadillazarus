@@ -260,7 +260,8 @@ class StoryList extends StatelessWidget {
     return new ArmadilloDragTarget<StoryClusterDragData>(
       onWillAccept: (_, __) => storyModel.allUnfocused,
       onAccept: (StoryClusterDragData data, _, __) {
-        storyModel.delete(storyModel.getStoryCluster(data.id));
+        final c = storyModel.getStoryCluster(data.id);
+        if (c != null) storyModel.delete(c);
         controller.reverse();
       },
       builder: (_, Map<StoryClusterDragData, Offset> candidateData, __) {
