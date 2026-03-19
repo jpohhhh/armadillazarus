@@ -48,6 +48,7 @@ class StoryBar extends StatelessWidget {
               SizeModel.kStoryBarMaximizedHeight == 0.0
           ? Nothing.widget
           : new PhysicalModel(
+              clipBehavior: Clip.antiAlias,
               color: story.themeColor,
               elevation: elevation,
               borderRadius: borderRadius,

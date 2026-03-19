@@ -406,6 +406,7 @@ class StoryPanels extends StatelessWidget {
                   model: story.simulatedFractionallySizedBoxModel,
                   alignment: FractionalOffset.topCenter,
                   child: new PhysicalModel(
+                    clipBehavior: Clip.antiAlias,
                     color: _kStoryBackgroundColor,
                     elevation: storyElevationWithTabs,
                     borderRadius: new BorderRadius.vertical(
